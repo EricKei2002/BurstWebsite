@@ -10,6 +10,7 @@ import Vlog from "./pages/homes/Vlog";
 import NoMatch from "./pages/NoMatcho";
 import Header from "./components/Header";
 
+import Footer from "./components/Footer";
 
 const App = () => {
   return(
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="*" element={<NoMatch />} />
       </Routes>
       
+      <Footer />
     </>
   );
   
