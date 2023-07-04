@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import './Top.css';
 import desktopVideo from "../../assets/images/top.mp4";
-import mobileVideo from "../../assets/images/p6.mp4";
+import mobileVideo from "../../assets/images/top-mobile.mp4";
 
 const Top = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 440);
