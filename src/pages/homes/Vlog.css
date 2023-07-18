@@ -1,15 +1,36 @@
 .vlog-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .video-wrapper {
-    margin-bottom: 20px;
-  }
-  .vlog-title {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 20px;
-  }
-  
+  position: relative; /* Make this a positioned element */
+  height: 100vh; /* Make it fill the full height of the screen */
+}
+
+.vlog-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.video-wrapper {
+  position: absolute; /* Make the videos positioned elements */
+  width: 1200px; /* Set the width of the video */
+  height: 675px; /* Set the height of the video */
+  display: flex; /* Make the video and its description side by side */
+}
+
+
+.video-wrapper iframe {
+  flex: 0 0 auto; /* Prevent the video from shrinking */
+}
+
+.video-description {
+  flex: 1 0 auto; /* Allow the description to take the remaining space */
+}
+
+.video-wrapper:first-child {
+  top: 0; /* Position the first video at the top */
+  left: 0; /* Position the first video at the left */
+}
+
+.video-wrapper:last-child {
+  bottom: 0; /* Position the second video at the bottom */
+  right: 0; /* Position the second video at the right */
+}
