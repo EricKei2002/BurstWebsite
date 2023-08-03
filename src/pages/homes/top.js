@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import './Top.css';
 import desktopVideo from "../../assets/images/top.mp4";
 import mobileVideo from "../../assets/images/top-mobile.mp4";
 
@@ -20,9 +19,25 @@ const Top = () => {
     };
   }, []);
 
+  const videoContainerStyle = {
+    position: "relative",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100vh",
+    overflow: "hidden",
+    zIndex: -1
+  };
+
+  const backgroundVideoStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover"
+  };
+
   return (
-    <Box className={`video-container ${isMobile ? 'mobile' : 'desktop'}`}>
-      <video className="background-video" autoPlay muted loop>
+    <Box style={videoContainerStyle} className={`${isMobile ? 'mobile' : 'desktop'}`}>
+      <video style={backgroundVideoStyle} autoPlay muted loop>
         <source src={isMobile ? mobileVideo : desktopVideo} type="video/mp4" />
       </video>
       <Link className="styled-link" to="/logo">
