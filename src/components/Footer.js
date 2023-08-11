@@ -7,27 +7,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
-  footerContainer: {
+
+  mainContainer: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
-    maxHeight: '10%',
+    minHeight: '100vh',
   },
-  footerContent: {
-    flex: '1 0 auto',
+  mainContent: {
+    flex: 1,
   },
   footer: {
-    flexShrink: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 16,
     backgroundColor: 'white',
+    padding: 16,
+    textAlign: 'center',
   },
   footerText: {
-    marginTop: 8,
+    marginTop: 1,
     color: 'black',
-    fontSize: 12,
+    fontSize: 15,
   },
   social: {
     display: 'flex',
@@ -37,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      marginRight: 70,
+      marginRight: 50,
       '&:last-child': {
-        marginRight: 0,
+        marginRight: 50,
       },
       '& a img': {
         transition: 'transform 0.3s ease',
@@ -93,23 +90,20 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.footerContainer}>
-      <div className={classes.footerContent}>
-        <AppBar style={{ position: 'fixed', bottom: '0' }} component="footer" position="static" sx={{ backgroundColor: 'white' }}>
-          <Container maxWidth="md">
-            <Box sx={{ textAlign: 'center' }}>
-              <div className={classes.footer}>
-                <SocialLinks />
-                <Typography variant="caption" className={classes.footerText}>
-                  ©2023 BURST
-                </Typography>
-              </div>
-            </Box>
-          </Container>
-        </AppBar>
-      </div>
-    </div>
+    <AppBar component="footer" position="static" sx={{ backgroundColor: 'white' }}>
+      <Container maxWidth="md">
+        <Box sx={{ textAlign: 'center' }}>
+          <div className={classes.footer}>
+            <SocialLinks />
+            <Typography variant="caption" className={classes.footerText}>
+              ©2023 BURST
+            </Typography>
+          </div>
+        </Box>
+      </Container>
+    </AppBar>
   );
 };
+
 
 export default Footer;
