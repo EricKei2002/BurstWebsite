@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     listStyle: 'none',
     '& li': {
-      marginRight: 10,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginRight: 70,
       '&:last-child': {
         marginRight: 0,
       },
@@ -73,7 +76,7 @@ function SocialLinks() {
           />
         </a>
         <span className={classes.footerText} style={{color: twitterHovered ? 'black' : 'black'}}>  {/* ホバー時の文字色を動的に切り替え */}
-        {twitterHovered ? "X" : "Twitter"}
+        {twitterHovered ? "   X   " : "Twitter"}
         </span>
       </li>
       <li>
