@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles((theme) => ({
   footerContainer: {
@@ -21,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#111',
+    backgroundColor: 'white',
   },
   footerText: {
     marginTop: 8,
-    color: 'white',
+    color: 'black',
     fontSize: 12,
   },
   social: {
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SocialLinks() {
   const classes = useStyles();
+  const [twitterHovered, setTwitterHovered] = useState(false); // ホバー状態を追跡するための状態
 
   return (
     <ul className={classes.social}>
@@ -60,11 +62,19 @@ function SocialLinks() {
         </a>
         <span className={classes.footerText}>YouTube</span>
       </li>
-      <li>
+      <li
+        onMouseEnter={() => setTwitterHovered(true)} // マウスが要素の上にあるとき
+        onMouseLeave={() => setTwitterHovered(false)} // マウスが要素の外に移動したとき
+      >
         <a href="#">
-          <img src="/twitter2.png" alt="Twitter Icon" />
+          <img
+            src={twitterHovered ? "/twitter-hovered.png" : "/twitter2.png"} // ホバー時の画像とデフォルトの画像を動的に切り替え
+            alt="Twitter Icon"
+          />
         </a>
-        <span className={classes.footerText}>Twitter</span>
+        <span className={classes.footerText} style={{color: twitterHovered ? 'black' : 'black'}}>  {/* ホバー時の文字色を動的に切り替え */}
+        {twitterHovered ? "X" : "Twitter"}
+        </span>
       </li>
       <li>
         <a href="https://www.instagram.com/burst_0000_8888/">
@@ -82,7 +92,7 @@ const Footer = () => {
   return (
     <div className={classes.footerContainer}>
       <div className={classes.footerContent}>
-        <AppBar style={{ position: 'fixed', bottom: '0' }} component="footer" position="static" sx={{ backgroundColor: '#111' }}>
+        <AppBar style={{ position: 'fixed', bottom: '0' }} component="footer" position="static" sx={{ backgroundColor: 'white' }}>
           <Container maxWidth="md">
             <Box sx={{ textAlign: 'center' }}>
               <div className={classes.footer}>
