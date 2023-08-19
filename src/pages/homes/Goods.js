@@ -8,7 +8,10 @@ const sectionStyle = {
   alignItems: "center",
   position: "relative",
   scrollSnapAlign: "center",
-  perspective: "500px"
+  perspective: "500px",
+  '@media (max-width: 600px)': {
+    perspective: '400px',
+  },
 };
 
 const divStyle = {
@@ -18,7 +21,12 @@ const divStyle = {
   maxHeight: "90vh",
   margin: "20px",
   background: "var(--white)",
-  overflow: "hidden"
+  overflow: "hidden",
+  '@media (max-width: 600px)': {
+    width: '50%',
+    height: 'auto',
+    margin: '3px',
+  },
 };
 
 const imgStyle = {
@@ -29,7 +37,13 @@ const imgStyle = {
   bottom: "0",
   width: "100%",
   height: "100%",
-  cursor: "pointer"
+  cursor: "pointer",
+  '@media (max-width: 600px)': {
+    width: '50%', // 例: スマホ画面で画像の幅を80%にする
+    height: '50%', // 例: スマホ画面で画像の高さを80%にする
+    top: '10%', // 画像を中央に配置するための調整
+    left: '50%',
+  },
 };
 
 const progressStyle = {
@@ -38,8 +52,13 @@ const progressStyle = {
   right: "0",
   height: "5px",
   background: "var(--accent)",
-  bottom: "100px"
+  bottom: "100px",
+  '@media (max-width: 600px)': {
+    height: '3px',
+    bottom: '45px',
+  },
 };
+
 
 function useParallax(value, distance) {
   return useTransform(value, [0, 1], [-distance, distance]);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import backgroundImage from "../../images/background.jpg";
-import member1Image from "../../images/893.jpg";
-import member2Image from "../../images/kei.jpg";
+import backgroundImage from "../../assets/images/background.jpg";
+import member1Image from "../../assets/images/893.jpg";
+import member2Image from "../../assets/images/kei.jpg";
 import { useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
