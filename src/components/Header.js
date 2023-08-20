@@ -48,36 +48,36 @@ const Header = () => {
             </Box>
             <Box>
               <List component="nav" sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <ListItem disablePadding>
-              <ListItemButton onClick={handleDrawerOpen} sx={{ textAlign: 'center', display: { xs: 'block', md: 'none' } }}>
-                                    <ListItemText primary={<MenuIcon sx={{ color: '#000000' }}/>} />
-                                </ListItemButton>
-                            </ListItem>
-                            { setNavLinks.map( (navLink) => (
-                            <ListItem disablePadding>
-                                <ListItemButton sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' } , color: 'black',marginRight: 2}} component={Link} to={navLink.url}>
-                                    <ListItemText primary={navLink.text} primaryTypographyProps={{ letterSpacing: 2 }} />
-                                </ListItemButton>
-                            </ListItem>
+                <ListItem disablePadding key="menu-icon">
+                  <ListItemButton onClick={handleDrawerOpen} sx={{ textAlign: 'center', display: { xs: 'block', md: 'none' } }}>
+                    <ListItemText primary={<MenuIcon sx={{ color: '#000000' }}/>} />
+                  </ListItemButton>
+                </ListItem>
+                {setNavLinks.map((navLink) => (
+                  <ListItem disablePadding key={navLink.url}>
+                    <ListItemButton sx={{ textAlign: 'center', display: { xs: 'none', md: 'block' }, color: 'black', marginRight: 2 }} component={Link} to={navLink.url}>
+                      <ListItemText primary={navLink.text} primaryTypographyProps={{ letterSpacing: 2 }} />
+                    </ListItemButton>
+                  </ListItem>
                 ))}
               </List>
             </Box>
             <Drawer anchor="right" open={open} onClose={handleDrawerClose} PaperProps={{ style: { width: '100%' } }}>
-                        <List component="nav" sx={{ display: 'block', justifyContent: 'normal' }}>
-                            <ListItem disablePadding>
-                                <ListItemButton onClick={handleDrawerClose} sx={{ textAlign: 'center', borderBottom: "solid 1px #696969" }}>
-                                    <ListItemText primary={<CloseIcon />} />
-                                </ListItemButton>
-                            </ListItem>
-                            { setNavLinks.map( (navLink) => (
-                            <ListItem disablePadding>
-                                <ListItemButton onClick={handleDrawerClose} sx={{ textAlign: 'center', borderBottom: "solid 1px #696969" }} component={Link} to={navLink.url}>
-                                    <ListItemText primary={navLink.text} />
-                                </ListItemButton>
-                            </ListItem>
-                            ))}
-                        </List>
-                    </Drawer>
+              <List component="nav" sx={{ display: 'block', justifyContent: 'normal' }}>
+                <ListItem disablePadding key="close-icon">
+                  <ListItemButton onClick={handleDrawerClose} sx={{ textAlign: 'center' }}>
+                    <ListItemText primary={<CloseIcon />} />
+                  </ListItemButton>
+                </ListItem>
+                {setNavLinks.map((navLink) => (
+                  <ListItem disablePadding key={navLink.url}>
+                    <ListItemButton onClick={handleDrawerClose} sx={{ textAlign: 'center' }} component={Link} to={navLink.url}>
+                      <ListItemText primary={navLink.text} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Drawer>
           </Box>
         </Container>
       </AppBar>

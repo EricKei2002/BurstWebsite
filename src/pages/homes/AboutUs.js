@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import backgroundImage from "../../assets/images/background.jpg";
 import member1Image from "../../assets/images/893.jpg";
 import member2Image from "../../assets/images/kei.jpg";
 import { useMediaQuery } from "@mui/material";
@@ -7,11 +6,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
 const AboutUs = () => {
-  const [opacity, setOpacity] = useState(0);
   const introTextRef = useRef(null);  // テキスト要素の参照を取得
   const activityTextRef = useRef(null);
-  const [introOpacity, setIntroOpacity] = useState(0);
-  const [activityOpacity, setActivityOpacity] = useState(0);
+  const [introOpacity] = useState(1);
+  const [activityOpacity] = useState(1);
   const introTextStyle = {
     fontSize: "5rem",
     opacity: introOpacity,
@@ -22,6 +20,7 @@ const AboutUs = () => {
   const handleMouseEnter = (linkName) => {
       setHoveredLink(linkName);
   }
+   const [isBackgroundWhite, setIsBackgroundWhite] = useState(true);
 
   const handleMouseLeave = () => {
       setHoveredLink(null);
@@ -33,38 +32,41 @@ const AboutUs = () => {
       cursor: 'pointer'
     });
 
-  useEffect(() => {
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const introTextPosition = introTextRef.current.offsetTop;
-    const activityTextPosition = activityTextRef.current.offsetTop;
-  
-    if (scrollTop > introTextPosition - window.innerHeight + 200) {
-      setIntroOpacity(1);
-    } else {
-      setIntroOpacity(0);
-    }
-  
-    if (scrollTop > activityTextPosition - window.innerHeight + 200) {
-      setActivityOpacity(1);
-    } else {
-      setActivityOpacity(0);
-    }
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollTop = window.scrollY;
+        const activityTextPosition = activityTextRef.current.getBoundingClientRect().top;
+        
+        // ページを少しでも下にスクロールした場合
+        if (scrollTop > 0 && activityTextPosition > 0) {
+          setIsBackgroundWhite(false);
+        } 
+        // '私たちの活動内容' のテキストが画面上部に来た場合
+        else if (activityTextPosition <= 0) {
+          setIsBackgroundWhite(true);
+        } else {
+          setIsBackgroundWhite(true);
+        }
+      };
+    
+      window.addEventListener("scroll", handleScroll);
+    
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+    
+
+
+
+    const activityTextStyle = {
+      ...introTextStyle,
+      fontSize: "3rem",
+      marginTop: "5%",
+      marginBottom: "30%",  // ここで間隔を調整
   };
   
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const activityTextStyle = {
-    ...introTextStyle,
-    fontSize: "3rem",
-    marginTop: "5%",  // 余白を追加してテキスト間のスペースを調整
-  };
   const activityTitleStyle = {
     fontSize: "8rem",
     textAlign: "center",
@@ -111,17 +113,18 @@ const AboutUs = () => {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "flex-end",
-    marginTop: "50%",
-    marginBottom: "50%",
-  };
+    marginTop: "20%",  // ここを修正
+    marginBottom: "5%",  // こちらも修正
+};
 
-  const memberContainerStyleSmallScreen = {
+const memberContainerStyleSmallScreen = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "50%",
-    marginBottom: "10%",
-  };
+    marginTop: "20%",  // ここを修正
+    marginBottom: "5%",  // こちらも修正
+};
+
 
   const memberImageStyle = {
     width: "600px",
@@ -136,20 +139,19 @@ const AboutUs = () => {
     width: "80%", // 画面幅の80%に調整
     height: "auto", // 高さは自動調整
     borderRadius: "30%",
-    marginBottom: "20px", // 下マージン調整
+    marginBottom: "10px", // 下マージン調整
   };
 
   const memberNameStyle = {
     fontSize: "3.5rem",
     fontWeight: "bold",
-    marginBottom: "40%",
+    marginBottom: "30%",
   };
 
   const memberDescriptionStyle = {
     textAlign: "left",
     fontSize: "3rem",
   };
-
   const containerStyle = {
     display: "flex",
     flexDirection: "column",
@@ -158,11 +160,12 @@ const AboutUs = () => {
     minHeight: "100vh",
     textAlign: "center",
     fontFamily: "Zen Maru Gothic",
-    backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
     paddingBottom: "50px",
-  };
+    backgroundColor: isBackgroundWhite ? "white" : "black",
+    color: isBackgroundWhite ? "black" : "white",
+    transition: "background-color 2s", // こちらを追加
+};
+
 
   const titleStyle = {
     fontSize: "8rem",
@@ -174,19 +177,23 @@ const AboutUs = () => {
     borderRadius: "10px",  // 角を少し丸くする
   };
 
+  
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("lg"));
-
+  const dynamicTextStyle = {
+    color: isBackgroundWhite ? 'black' : 'white'
+  };
+  
   return (
     <ThemeProvider theme={theme}>
       <div style={containerStyle}>
-        <h1 style={titleStyle}>About Us</h1>
-        <p style={introTextStyle} ref={introTextRef}>
+        <h1 style={{ ...titleStyle, ...dynamicTextStyle }}>About Us</h1>
+        <p style={{ ...introTextStyle, ...dynamicTextStyle }} ref={introTextRef}>
           私たちは長野県白馬村で出会い、
           <br />
           同じ目標があり結成されたグループです。
-</p>
-<p style={activityTitleStyle}>私たちの活動内容</p>
-        <p style={{...activityTextStyle, opacity: activityOpacity}} ref={activityTextRef}>
+        </p>
+        <p style={{ ...activityTitleStyle, ...dynamicTextStyle }}>私たちの活動内容</p>
+        <p style={{ ...activityTextStyle, opacity: activityOpacity, ...dynamicTextStyle }} ref={activityTextRef}>
             <a href="http://localhost:3000/Logo" style={getLinkStyle('Logo')} onMouseEnter={() => handleMouseEnter('Logo')} onMouseLeave={handleMouseLeave}>Logodesigns</a>、
             <a href="https://github.com/EricKei2002" style={getLinkStyle('Programming')} onMouseEnter={() => handleMouseEnter('Programming')} onMouseLeave={handleMouseLeave}>Programming</a>、
             <a href="http://localhost:3000/Goods" style={getLinkStyle('Goods')} onMouseEnter={() => handleMouseEnter('Goods')} onMouseLeave={handleMouseLeave}>Goods制作</a>、

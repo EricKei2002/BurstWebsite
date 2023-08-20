@@ -96,11 +96,14 @@ export default function App() {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
     <>
+      <header style={{ textAlign: "center", padding: "5%" }}>
+        <h1 style={{ fontSize: "10em" }}>BURST Goods</h1>
+      </header>
       {[1, 2, 3, 4].map((image) => (
         <Image id={image} key={image} />
       ))}
