@@ -17,6 +17,24 @@ const AboutUs = () => {
   };
   const [hoveredLink, setHoveredLink] = useState(null);
 
+
+  const styles = `
+        @keyframes tracking-in-contract-bck {
+            0% {
+                letter-spacing: 1em;
+                transform: translateZ(-0.5em);
+                opacity: 0;
+            }
+            100% {
+                transform: translateZ(0);
+                opacity: 1;
+            }
+        }
+
+        .tracking-in-contract-bck {
+            animation: tracking-in-contract-bck 2s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        }
+    `;
   const handleMouseEnter = (linkName) => {
       setHoveredLink(linkName);
   }
@@ -35,29 +53,35 @@ const AboutUs = () => {
 
     useEffect(() => {
       const handleScroll = () => {
-        const scrollTop = window.scrollY;
-        const activityTextPosition = activityTextRef.current.getBoundingClientRect().top;
-        
-        // ページを少しでも下にスクロールした場合
-        if (scrollTop > 0 && activityTextPosition > 0) {
-          setIsBackgroundWhite(false);
-        } 
-        // '私たちの活動内容' のテキストが画面上部に来た場合
-        else if (activityTextPosition <= 0) {
-          setIsBackgroundWhite(true);
-        } else {
-          setIsBackgroundWhite(true);
-        }
+          const scrollTop = window.scrollY;
+          const activityTextPosition = activityTextRef.current.getBoundingClientRect().top;
+          
+          // ページを少しでも下にスクロールした場合
+          if (scrollTop > 0 && activityTextPosition > 0) {
+              setIsBackgroundWhite(false);
+          } 
+          // '私たちの活動内容' のテキストが画面上部に来た場合
+          else if (activityTextPosition <= 0) {
+              setIsBackgroundWhite(true);
+          } else {
+              setIsBackgroundWhite(true);
+          }
       };
-    
+  
+      const styleTag = document.createElement('style');
+      styleTag.innerHTML = styles;
+      document.head.appendChild(styleTag);
+      
       window.addEventListener("scroll", handleScroll);
-    
+      
       return () => {
-        window.removeEventListener("scroll", handleScroll);
+          // コンポーネントがアンマウントされるときにstyleタグを削除
+          document.head.removeChild(styleTag);
+          // スクロールイベントのリスナーを削除
+          window.removeEventListener("scroll", handleScroll);
       };
-    }, []);
-    
-
+  }, []);
+  
 
 
     const activityTextStyle = {
@@ -186,7 +210,7 @@ const memberContainerStyleSmallScreen = {
   return (
     <ThemeProvider theme={theme}>
       <div style={containerStyle}>
-        <h1 style={{ ...titleStyle, ...dynamicTextStyle }}>About Us</h1>
+      <h1 className="tracking-in-contract-bck" style={{ ...titleStyle, ...dynamicTextStyle }}>About Us</h1>
         <p style={{ ...introTextStyle, ...dynamicTextStyle }} ref={introTextRef}>
           私たちは長野県白馬村で出会い、
           <br />

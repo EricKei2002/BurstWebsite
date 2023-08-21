@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import LoadingSpinner from './components/LoadingSpinner';
 
 import Top from "./pages/homes/top";
@@ -13,15 +13,20 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const [loading, setLoading] = useState(location.pathname === '/');
 
   useEffect(() => {
+    if (location.pathname !== '/') {
+      return;
+    }
+
     const timer = setTimeout(() => {
       setLoading(false);
     }, 5000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname]);
 
   if (loading) {
     return <LoadingSpinner />;

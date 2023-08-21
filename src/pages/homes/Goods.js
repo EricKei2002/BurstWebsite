@@ -9,9 +9,6 @@ const sectionStyle = {
   position: "relative",
   scrollSnapAlign: "center",
   perspective: "500px",
-  '@media (max-width: 600px)': {
-    perspective: '400px',
-  },
 };
 
 const divStyle = {
@@ -22,11 +19,6 @@ const divStyle = {
   margin: "20px",
   background: "var(--white)",
   overflow: "hidden",
-  '@media (max-width: 600px)': {
-    width: '50%',
-    height: 'auto',
-    margin: '3px',
-  },
 };
 
 const imgStyle = {
@@ -38,12 +30,6 @@ const imgStyle = {
   width: "100%",
   height: "100%",
   cursor: "pointer",
-  '@media (max-width: 600px)': {
-    width: '50%', // 例: スマホ画面で画像の幅を80%にする
-    height: '50%', // 例: スマホ画面で画像の高さを80%にする
-    top: '10%', // 画像を中央に配置するための調整
-    left: '50%',
-  },
 };
 
 const progressStyle = {
@@ -53,10 +39,6 @@ const progressStyle = {
   height: "5px",
   background: "var(--accent)",
   bottom: "100px",
-  '@media (max-width: 600px)': {
-    height: '3px',
-    bottom: '45px',
-  },
 };
 
 
@@ -101,8 +83,27 @@ export default function App() {
 
   return (
     <>
+      <style>
+        {`
+          @keyframes focus-in-expand-fwd {
+            0% {
+              letter-spacing: -0.5em;
+              transform: translateZ(-1em);
+              opacity: 0;
+            }
+            100% {
+              transform: translateZ(0);
+              opacity: 1;
+            }
+          }
+
+          .focus-in-expand-fwd {
+            animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          }
+        `}
+      </style>
       <header style={{ textAlign: "center", padding: "5%" }}>
-        <h1 style={{ fontSize: "10em" }}>BURST Goods</h1>
+        <h1 className="focus-in-expand-fwd" style={{ fontSize: "10em" }}>BURST Goods</h1>
       </header>
       {[1, 2, 3, 4].map((image) => (
         <Image id={image} key={image} />
