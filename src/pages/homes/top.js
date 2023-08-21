@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import desktopVideo from "../../assets/images/top.mp4";
+import desktopVideo from "/home/burst/BurstWebSite/src/assets/images/HP MOVIE2.mp4";
 import mobileVideo from "../../assets/images/top-mobile.mp4";
 
 const Top = () => {
