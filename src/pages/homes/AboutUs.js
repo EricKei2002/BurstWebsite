@@ -3,6 +3,7 @@ import member1Image from "../../assets/images/893.jpg";
 import member2Image from "../../assets/images/kei.jpg";
 import { useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 
 const AboutUs = () => {
@@ -17,6 +18,19 @@ const AboutUs = () => {
   };
   const [hoveredLink, setHoveredLink] = useState(null);
 
+
+  const hoverVariants = {
+    initial: {
+        backgroundPosition: '100% 0',
+        scale: 1,
+        y: 0
+    },
+    hover: {
+        backgroundPosition: '0 0',
+        scale: 1.05,
+        y: "-5px"
+    }
+};
 
   const styles = `
         @keyframes tracking-in-contract-bck {
@@ -45,29 +59,28 @@ const AboutUs = () => {
   }
 
   const getLinkStyle = (linkName) => ({
-      color: hoveredLink === linkName ? 'white' : 'inherit',
-      textDecoration: 'underline',
-      cursor: 'pointer'
-    });
+    color: hoveredLink === linkName ? 'white' : 'inherit',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+    marginRight: '80px'  // ここで右マージンを追加
+});
 
-
-    useEffect(() => {
-      const handleScroll = () => {
-          const scrollTop = window.scrollY;
-          const activityTextPosition = activityTextRef.current.getBoundingClientRect().top;
-          
-          // ページを少しでも下にスクロールした場合
-          if (scrollTop > 0 && activityTextPosition > 0) {
-              setIsBackgroundWhite(false);
-          } 
-          // '私たちの活動内容' のテキストが画面上部に来た場合
-          else if (activityTextPosition <= 0) {
-              setIsBackgroundWhite(true);
-          } else {
-              setIsBackgroundWhite(true);
-          }
-      };
-  
+useEffect(() => {
+  const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const introTextBottomPosition = introTextRef.current.getBoundingClientRect().bottom;
+      const activityTextTopPosition = activityTextRef.current.getBoundingClientRect().top;
+      const buffer = 400;  // 余白の設定
+      
+      // ページを少しでも下にスクロールした場合
+      if (scrollTop > 0 && activityTextTopPosition > 0) {
+          setIsBackgroundWhite(false);
+      } 
+      // '私たちは長野県白馬村で出会い、同じ目標があり結成されたグループです。' のテキストの底部が画面の上部よりもさらに上に50px来た場合
+      else if (introTextBottomPosition <= -buffer) {
+          setIsBackgroundWhite(true);
+      } 
+  };
       const styleTag = document.createElement('style');
       styleTag.innerHTML = styles;
       document.head.appendChild(styleTag);
@@ -82,22 +95,58 @@ const AboutUs = () => {
       };
   }, []);
   
-
-
-    const activityTextStyle = {
-      ...introTextStyle,
-      fontSize: "3rem",
-      marginTop: "5%",
-      marginBottom: "30%",  // ここで間隔を調整
+  const MotionLink = ({ children, ...props }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const animoGradientText = {
+      display: 'inline-block',
+      backgroundColor: '#000',
+      backgroundImage: 'linear-gradient(to right, #ff69b4 0%, #ff4500 25%, #ffd700 50%, #7fff00 75%, #00ced1 100%)',
+      backgroundPosition: '100% 0',
+      backgroundSize: '200% 200%',
+      color: 'transparent',
+      WebkitBackgroundClip: 'text',
+      backgroundClip: 'text',
+      cursor: 'pointer'
   };
   
-  const activityTitleStyle = {
-    fontSize: "8rem",
-    textAlign: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.7)", // 半透明の白い背景
-    padding: "10px",  // 背景がテキストにぴったりつかないようにパディングを追加
-    borderRadius: "10px",  // 角を少し丸くする// ここで希望のフォントサイズに変更
-  };
+  const animoGradientTextHovered = {
+    ...animoGradientText,
+    backgroundColor: 'white', // 背景を白に設定
+    color: 'black',          // テキストの色を黒に設定
+    backgroundPosition: '0 0',
+};
+return (
+    <motion.a
+        style={isHovered ? animoGradientTextHovered : animoGradientText}  // ホバー時のスタイルを適用
+        initial="initial"
+        whileHover="hover"
+        variants={hoverVariants}
+        onMouseEnter={() => { setIsHovered(true); handleMouseEnter(props.linkName); }}
+        onMouseLeave={() => { setIsHovered(false); handleMouseLeave(); }}
+        {...props}
+    >
+        {children}
+    </motion.a>
+);
+};
+
+  const activityTextStyle = {
+    ...introTextStyle,
+    fontSize: "3rem",
+    marginTop: "5%",
+    marginBottom: "30%",  // ここで間隔を調整
+    textAlign: 'center'   // ここを追加
+};
+  
+const activityTitleStyle = {
+  fontSize: "8rem",
+  textAlign: "center",
+  backgroundColor: "rgba(255, 255, 255, 0.7)", 
+  padding: "10px",  
+  borderRadius: "10px", 
+  marginBottom: "20%"  // ここを調整して間隔を変更
+};
+
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -218,12 +267,12 @@ const memberContainerStyleSmallScreen = {
         </p>
         <p style={{ ...activityTitleStyle, ...dynamicTextStyle }}>私たちの活動内容</p>
         <p style={{ ...activityTextStyle, opacity: activityOpacity, ...dynamicTextStyle }} ref={activityTextRef}>
-            <a href="http://localhost:3000/Logo" style={getLinkStyle('Logo')} onMouseEnter={() => handleMouseEnter('Logo')} onMouseLeave={handleMouseLeave}>Logodesigns</a>、
-            <a href="https://github.com/EricKei2002" style={getLinkStyle('Programming')} onMouseEnter={() => handleMouseEnter('Programming')} onMouseLeave={handleMouseLeave}>Programming</a>、
-            <a href="http://localhost:3000/Goods" style={getLinkStyle('Goods')} onMouseEnter={() => handleMouseEnter('Goods')} onMouseLeave={handleMouseLeave}>Goods制作</a>、
-            <a href="http://localhost:3000/Vlog" style={getLinkStyle('Vlog')} onMouseEnter={() => handleMouseEnter('Vlog')} onMouseLeave={handleMouseLeave}>Vlog作成</a>、
-            <a href="https://www.twitch.tv/chicken0216" style={getLinkStyle('Streaming')} onMouseEnter={() => handleMouseEnter('Streaming')} onMouseLeave={handleMouseLeave}>Streaming</a>
-        </p>
+    <MotionLink href="http://localhost:3000/Logo" style={getLinkStyle('Logo')} onMouseEnter={() => handleMouseEnter('Logo')} onMouseLeave={handleMouseLeave}>Logodesigns</MotionLink>
+    <MotionLink href="https://github.com/EricKei2002" style={getLinkStyle('Programming')} onMouseEnter={() => handleMouseEnter('Programming')} onMouseLeave={handleMouseLeave}>Programming</MotionLink>
+    <MotionLink href="http://localhost:3000/Goods" style={getLinkStyle('Goods')} onMouseEnter={() => handleMouseEnter('Goods')} onMouseLeave={handleMouseLeave}>Goods制作</MotionLink>
+    <MotionLink href="http://localhost:3000/Vlog" style={getLinkStyle('Vlog')} onMouseEnter={() => handleMouseEnter('Vlog')} onMouseLeave={handleMouseLeave}>Vlog作成</MotionLink>
+    <MotionLink href="https://www.twitch.tv/chicken0216" style={getLinkStyle('Streaming')} onMouseEnter={() => handleMouseEnter('Streaming')} onMouseLeave={handleMouseLeave}>Streaming</MotionLink>
+</p>
         <div>
           <MemberProfile
             imageSrc={member1Image}
