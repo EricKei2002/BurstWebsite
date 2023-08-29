@@ -12,9 +12,10 @@ const AboutUs = () => {
   const [introOpacity] = useState(1);
   const [activityOpacity] = useState(1);
   const introTextStyle = {
-    fontSize: "5rem",
+    fontSize: "3rem",
     opacity: introOpacity,
-    transition: "opacity 1s, all 5s"
+    transition: "opacity 1s, all 5s",
+    marginBottom: "20rem" // この行を追加
   };
   const [hoveredLink, setHoveredLink] = useState(null);
 
@@ -62,7 +63,7 @@ const AboutUs = () => {
     color: hoveredLink === linkName ? 'white' : 'inherit',
     textDecoration: 'underline',
     cursor: 'pointer',
-    marginRight: '80px'  // ここで右マージンを追加
+    marginRight: '50px'  // ここで右マージンを追加
 });
 
 useEffect(() => {
@@ -132,7 +133,7 @@ return (
 
   const activityTextStyle = {
     ...introTextStyle,
-    fontSize: "3rem",
+    fontSize: "5rem",
     marginTop: "5%",
     marginBottom: "30%",  // ここで間隔を調整
     textAlign: 'center'   // ここを追加
@@ -260,18 +261,17 @@ const memberContainerStyleSmallScreen = {
     <ThemeProvider theme={theme}>
       <div style={containerStyle}>
       <h1 className="tracking-in-contract-bck" style={{ ...titleStyle, ...dynamicTextStyle }}>About Us</h1>
-        <p style={{ ...introTextStyle, ...dynamicTextStyle }} ref={introTextRef}>
-          私たちは長野県白馬村で出会い、
-          <br />
-          同じ目標があり結成されたグループです。
-        </p>
-        <p style={{ ...activityTitleStyle, ...dynamicTextStyle }}>私たちの活動内容</p>
+      <p style={{ ...introTextStyle, ...dynamicTextStyle }} ref={introTextRef}>
+  burstはロゴデザインとweb・アプリ製作とGoods制作を行ってます。<br />
+  デザインの加藤優、技術の山本エリック恵の2人で2023年の結成されました。<br />
+  笑顔をイメージしたデザインやクスッと笑えるようなアイデア性で<br />
+  見た人や関わる人の笑顔を作ることを理念に活動しています。
+</p>
+        <p style={{ ...activityTitleStyle, ...dynamicTextStyle }}>Our Areas of Expertise</p>
         <p style={{ ...activityTextStyle, opacity: activityOpacity, ...dynamicTextStyle }} ref={activityTextRef}>
     <MotionLink href="http://localhost:3000/Logo" style={getLinkStyle('Logo')} onMouseEnter={() => handleMouseEnter('Logo')} onMouseLeave={handleMouseLeave}>Logodesigns</MotionLink>
     <MotionLink href="https://github.com/EricKei2002" style={getLinkStyle('Programming')} onMouseEnter={() => handleMouseEnter('Programming')} onMouseLeave={handleMouseLeave}>Programming</MotionLink>
     <MotionLink href="http://localhost:3000/Goods" style={getLinkStyle('Goods')} onMouseEnter={() => handleMouseEnter('Goods')} onMouseLeave={handleMouseLeave}>Goods制作</MotionLink>
-    <MotionLink href="http://localhost:3000/Vlog" style={getLinkStyle('Vlog')} onMouseEnter={() => handleMouseEnter('Vlog')} onMouseLeave={handleMouseLeave}>Vlog作成</MotionLink>
-    <MotionLink href="https://www.twitch.tv/chicken0216" style={getLinkStyle('Streaming')} onMouseEnter={() => handleMouseEnter('Streaming')} onMouseLeave={handleMouseLeave}>Streaming</MotionLink>
 </p>
         <div>
           <MemberProfile

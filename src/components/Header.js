@@ -17,11 +17,11 @@ import Drawer from "@mui/material/Drawer";
 
 const setNavLinks = [
   { text: "Top", url: "/" },
-  { text: "AboutUs", url: "/AboutUs" },
-  { text: "Goods", url: "/Goods" },
   { text: "Logo", url: "/Logo" },
-  { text: "Contact", url: "/contact" },
-  { text: "Vlog", url: "/Vlog" },
+  { text: "Programming", url: "/Programming" },
+  { text: "Goods", url: "/Goods" },
+  { text: "AboutUs", url: "/AboutUs" },
+  { text: "contact", url: "/contact" },
 ];
 
 const Header = () => {
