@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import member1Image from "../../assets/images/893.jpg";
+import member1Image from "../../assets/images/HP写真.png";
 import member2Image from "../../assets/images/kei.jpg";
 import { useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -263,7 +263,7 @@ const memberContainerStyleSmallScreen = {
       <h1 className="tracking-in-contract-bck" style={{ ...titleStyle, ...dynamicTextStyle }}>About Us</h1>
       <p style={{ ...introTextStyle, ...dynamicTextStyle }} ref={introTextRef}>
   burstはロゴデザインとweb・アプリ製作とGoods制作を行ってます。<br />
-  デザインの加藤優、技術の山本エリック恵の2人で2023年の結成されました。<br />
+  デザインの加藤有、技術の山本エリック恵の2人で2023年の結成されました。<br />
   笑顔をイメージしたデザインやクスッと笑えるようなアイデア性で<br />
   見た人や関わる人の笑顔を作ることを理念に活動しています。
 </p>

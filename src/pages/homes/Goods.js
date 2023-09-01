@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
+
 const sectionStyle = {
   height: "100vh",
   display: "flex",
@@ -8,7 +9,7 @@ const sectionStyle = {
   alignItems: "center",
   position: "relative",
   scrollSnapAlign: "center",
-  perspective: "500px",
+  perspective: "500wh",
 };
 
 const divStyle = {
@@ -27,8 +28,8 @@ const imgStyle = {
   left: "0",
   right: "0",
   bottom: "0",
-  width: "100%",
-  height: "100%",
+  width: "100wh",
+  height: "100wh",
   cursor: "pointer",
 };
 

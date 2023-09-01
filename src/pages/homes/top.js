@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import desktopVideo from "/home/burst/BurstWebSite/src/assets/images/HP MOVIE2.mp4";
-import mobileVideo from "../../assets/images/top-mobile.mp4";
 
 const Top = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 440);
@@ -32,14 +31,35 @@ const Top = () => {
   const backgroundVideoStyle = {
     width: "100%",
     height: "100%",
-    objectFit: "cover"
+    objectFit: "contain"
+  };
+
+  const textStyle = {
+    position: "absolute",
+    width: "100%",
+    textAlign: "center",
+    zIndex: 1,
+    fontSize: "2em",  // フォントサイズを大きく
+    fontWeight: "bold" // テキストを太く
   };
 
   return (
     <Box style={videoContainerStyle} className={`${isMobile ? 'mobile' : 'desktop'}`}>
+      {/* 上部のテキスト */}
+      <div style={{ ...textStyle, top: "5%" }}>
+        <p>笑顔をイメージしたデザインやクスッと笑えるようなアイデア性で</p>
+      </div>
+
+      {/* ビデオ */}
       <video style={backgroundVideoStyle} autoPlay muted loop>
-        <source src={isMobile ? mobileVideo : desktopVideo} type="video/mp4" />
+        <source src={desktopVideo} type="video/mp4" />
       </video>
+
+      {/* 下部のテキスト */}
+      <div style={{ ...textStyle, bottom: "5%" }}>
+        <p>見た人や関わる人の笑顔を作ることを理念に活動しています。</p>
+      </div>
+
       <Link className="styled-link" to="/logo">
         <motion.div 
           className={`text ${isMobile ? 'mobile' : 'desktop'}`}
@@ -47,7 +67,6 @@ const Top = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5 }}
         >
-          BURSTでLogoを作成しよう
         </motion.div>
       </Link>
     </Box>
@@ -55,3 +74,6 @@ const Top = () => {
 };
 
 export default Top;
+
+
+

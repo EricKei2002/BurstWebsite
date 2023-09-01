@@ -27,8 +27,8 @@ const styles = {
     justifyContent: 'center',
   },
   image: {
-    width: '25%',
-    height: '20%',
+    width: '25wh',
+    height: '20wh',
   }
 }
 
