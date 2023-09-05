@@ -103,7 +103,7 @@ export default function App() {
           }
         `}
       </style>
-      <header style={{ textAlign: "center", padding: "5%" }}>
+      <header style={{ textAlign: "center", padding: "20%" }}>
         <h1 className="focus-in-expand-fwd" style={{ fontSize: "10em" }}>BURST Goods</h1>
       </header>
       {[1, 2, 3, 4].map((image) => (
