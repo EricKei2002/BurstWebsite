@@ -1,21 +1,59 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import logoImage from "../../assets/images/DSC08460.jpg"; // 画像をインポート
+import React from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
-const Logo = () => {
-    const ref = useRef(null);
-    const { scrollY } = useScroll({ target: ref });
+export default function Programming() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
-    // スクロールに基づいてy位置を変更
-    const y = useTransform(scrollY, [0, 1000], [0, -200]); // これは例です。値は調整が必要です。
+  return (
+    <>
+      <style>
+        {`
+          @keyframes focus-in-expand-fwd {
+            0% {
+              letter-spacing: -0.5em;
+              transform: translateZ(-1em);
+              opacity: 0;
+            }
+            100% {
+              transform: translateZ(0);
+              opacity: 1;
+            }
+          }
 
-    return (
-        <motion.div ref={ref} style={{ y }}>
-            <h2>作成したロゴを載せる</h2>
-            <motion.img src={logoImage} alt="ロゴ" style={{ height: '400px', width: 'auto' }} />
-            {/* ここにロゴの画像やその他の要素を追加できます */}
-        </motion.div>
-    );
-};
+          .focus-in-expand-fwd {
+            animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          }
 
-export default Logo;
+          @media (max-width: 600px) {
+            h1, .resize-text {
+              font-size: 5em;
+            }
+          }
+
+          .wrap-text {
+            white-space: normal;
+            word-break: break-word;
+          }
+        `}
+      </style>
+      <header style={{ textAlign: "center", paddingTop: "20%" }}>
+        <h1 className="focus-in-expand-fwd wrap-text" style={{ fontSize: "9em" }}>
+          BURST Programming
+        </h1>
+        <div style={{ paddingBottom: "20%" }}> </div>
+        <div className="wrap-text resize-text" style={{ fontSize: "5em", textAlign: "center" }}>
+          このページは作成途中 お待ちください
+        </div>
+        <div className="wrap-text resize-text" style={{ paddingTop: "5%", fontSize: "3em", textAlign: "center", fontWeight: "bold" }}>
+          by Eric Kei
+        </div>
+        <div style={{ paddingBottom: "20%" }}> </div>
+      </header>
+    </>
+  );
+}

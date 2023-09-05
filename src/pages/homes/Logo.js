@@ -37,7 +37,7 @@ export default function App() {
         </style>
         <header style={{ textAlign: "center", paddingTop: "20%" }}>
           <h1 className="focus-in-expand-fwd" style={{ fontSize: "9em" }}>
-            BURST Goods
+            BURST Logo
           </h1>
         </header>
         <motion.div style={{ marginTop: "25%" }}>
