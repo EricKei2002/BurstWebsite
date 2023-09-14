@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react"; // useEffect をインポート
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 
@@ -10,27 +10,7 @@ const sectionStyle = {
   position: "relative",
   scrollSnapAlign: "center",
   perspective: "500wh",
-};
-
-const divStyle = {
-  width: "500px",
-  height: "600px",
-  position: "relative",
-  maxHeight: "90vh",
-  margin: "20px",
-  background: "var(--white)",
-  overflow: "hidden",
-};
-
-const imgStyle = {
-  position: "absolute",
-  top: "0",
-  left: "0",
-  right: "0",
-  bottom: "0",
-  width: "100wh",
-  height: "100wh",
-  cursor: "pointer",
+  marginBottom: "2rem"  // この行を追加
 };
 
 const progressStyle = {
@@ -42,15 +22,20 @@ const progressStyle = {
   bottom: "100px",
 };
 
-
 function useParallax(value, distance) {
   return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-function Image({ id }) {
+function Image({ id, divStyle, imgStyle, windowWidth }) { // windowWidth を追加
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, 300);
+
+  const h2DynamicStyle = {
+    fontSize: windowWidth <= 768 ? '4.5vw' : '4.5vw',  // スマホの場合、フォントサイズを小さくする
+    margin: windowWidth <= 768 ? '1rem 0' : '2rem 0', // スマホの場合、マージンを調整する
+  };
+
 
   // 各画像のURLを定義
   const imageUrls = {
@@ -69,7 +54,7 @@ function Image({ id }) {
           <img src={`/${id}.jpg`} alt={`Image ${id}`} style={imgStyle} />
         </div>
       </a>
-      <motion.h2 style={{ y }}>{`#00${id}`}</motion.h2>
+      <motion.h2 style={{ ...h2DynamicStyle, y }}>{`#00${id}`}</motion.h2>
     </section>
   );
 }
@@ -82,9 +67,75 @@ export default function App() {
     restDelta: 0.001,
   });
 
+  // ホバーの状態を管理するためのステート
+  const [isHovered, setIsHovered] = useState(false); // この行を追加
+
+  // 現在の画面の幅を監視するためのステート
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // 画面の幅が変わった時に更新するためのエフェクト
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+// ボタンのスタイルを動的に変更
+const buttonStyle = {
+  display: 'inline-block',
+  padding: '10px 20px',
+  fontSize: windowWidth <= 768 ? 'vw' : '10vw',  // 768px以下の場合、フォントサイズを6vwに変更
+  textAlign: 'center',
+  textDecoration: 'none',
+  color: 'black',
+  backgroundColor: isHovered ? '#333' : 'white',
+  borderRadius: '5px',
+  transition: 'background-color 0.2s',
+};
+const divStyle = windowWidth <= 768 ? { 
+  width: "80vw",
+  height: "60vh",
+  position: "relative",
+  margin: "20px",
+  background: "var(--white)",
+  overflow: "hidden",
+} : {
+  width: "500px",
+  height: "600px",
+  position: "relative",
+  maxHeight: "90vh",
+  margin: "20px",
+  background: "var(--white)",
+  overflow: "hidden",
+};
+
+const imgStyle = windowWidth <= 768 ? {
+  position: "absolute",
+  top: "0",
+  left: "0",
+  right: "0",
+  bottom: "0",
+  width: "100%",
+  height: "100%",
+  cursor: "pointer",
+} : {
+  position: "absolute",
+  top: "0",
+  left: "0",
+  right: "0",
+  bottom: "0",
+  width: "100wh",
+  height: "100wh",
+  cursor: "pointer",
+};
+
   return (
     <>
-      <style>
+       <style>
         {`
           @keyframes focus-in-expand-fwd {
             0% {
@@ -101,14 +152,53 @@ export default function App() {
           .focus-in-expand-fwd {
             animation: focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
           }
+
+          .wrap-text {
+            white-space: normal;
+            word-break: break-word;
+          }
+
+          @media (max-width: 600px) {
+            h1, .resize-text {
+              font-size: 2.5em;
+            }
+          }
+
+          @media (min-width: 601px) and (max-width: 960px) {
+            h1, .resize-text {
+              font-size: 4em;
+            }
+          }
+
+          @media (min-width: 961px) {
+            h1 {
+              font-size: 9em;
+            }
+            .resize-text {
+              font-size: 5em;
+            }
+          }
         `}
       </style>
-      <header style={{ textAlign: "center", padding: "20%" }}>
-        <h1 className="focus-in-expand-fwd" style={{ fontSize: "10em" }}>BURST Goods</h1>
+      <header style={{ textAlign: "center", paddingTop: "20%" }}>
+      <h1 className="focus-in-expand-fwd wrap-text">BURST Goods</h1>
+      <div style={{ paddingBottom: "20%" }}> </div>
       </header>
       {[1, 2, 3, 4].map((image) => (
-        <Image id={image} key={image} />
+        <Image id={image} key={image} divStyle={divStyle} imgStyle={imgStyle} windowWidth={windowWidth} />
       ))}
+      <div style={{ textAlign: "center", marginTop: "2rem", marginBottom: "15rem" }}>
+        <a 
+          href="https://suzuri.jp/BURST" 
+          style={buttonStyle} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onMouseEnter={() => setIsHovered(true)}  // ホバー開始時にステートを更新
+          onMouseLeave={() => setIsHovered(false)} // ホバー終了時にステートを更新
+        >
+          etc.
+        </a>
+      </div>
       <motion.div className="progress" style={{ ...progressStyle, scaleX }} />
     </>
   );

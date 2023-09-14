@@ -3,7 +3,10 @@ import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import desktopVideo from "/home/burst/BurstWebSite/src/assets/images/HP MOVIE2.mp4";
-import portfolioImage from "/home/burst/BurstWebSite/src/assets/images/893.jpg";
+import portfolioImage from "/home/burst/BurstWebSite/src/assets/images/S__71622688_0.jpg";
+import portfolioImage2 from "/home/burst/BurstWebSite/src/assets/images/S__71622690_0.jpg";
+import portfolioImage3 from "/home/burst/BurstWebSite/src/assets/images/S__71622691_0.jpg";
+import portfolioImage4 from "/home/burst/BurstWebSite/src/assets/images/S__71622692_0.jpg";
 
 const Top = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 440);
@@ -18,6 +21,23 @@ const Top = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+    // 現在の画像のインデックスを管理するための状態変数
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // ポートフォリオの画像の配列
+    const portfolioImages = [portfolioImage, portfolioImage2, portfolioImage3, portfolioImage4];
+  
+    // 5秒ごとに画像を切り替える
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % portfolioImages.length);
+      }, 2000);
+  
+      // クリーンアップ関数
+      return () => {
+        clearTimeout(timer);
+      };
+    }, [currentImageIndex]);
 
   const videoContainerStyle = {
     position: "relative",
@@ -81,7 +101,7 @@ const Top = () => {
       <div style={achievementsTextStyle}>
         <p>作品実績</p>
       </div>
-      <img src={portfolioImage} alt="ポートフォリオの画像" style={portfolioImageStyle} />
+      <img src={portfolioImages[currentImageIndex]} alt="ポートフォリオの画像" style={portfolioImageStyle} />
       <Link className="styled-link" to="/logo">
         <motion.div 
           className={`text ${isMobile ? 'mobile' : 'desktop'}`}
