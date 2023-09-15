@@ -32,7 +32,7 @@ function Image({ id, divStyle, imgStyle, windowWidth }) { // windowWidth を追�
   const y = useParallax(scrollYProgress, 300);
 
   const h2DynamicStyle = {
-    fontSize: windowWidth <= 768 ? '4.5vw' : '4.5vw',  // スマホの場合、フォントサイズを小さくする
+    fontSize: windowWidth <= 768 ? '4.5vw' : '2vw',  // スマホの場合、フォントサイズを小さくする
     margin: windowWidth <= 768 ? '1rem 0' : '2rem 0', // スマホの場合、マージンを調整する
   };
 
@@ -88,7 +88,7 @@ export default function App() {
 const buttonStyle = {
   display: 'inline-block',
   padding: '10px 20px',
-  fontSize: windowWidth <= 768 ? 'vw' : '10vw',  // 768px以下の場合、フォントサイズを6vwに変更
+  fontSize: windowWidth <= 768 ? '6vw' : '2vw',  // 768px以下の場合、フォントサイズを6vwに変更
   textAlign: 'center',
   textDecoration: 'none',
   color: 'black',

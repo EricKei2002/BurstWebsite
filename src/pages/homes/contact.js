@@ -17,7 +17,7 @@ const Header = styled.header`
   text-align: center;
   padding: 25% 0;  // 上下のパディングを5%に設定し、左右のパディングを0に設定
   h1 {
-    font-size: 2em;
+    font-size: 4em;
     animation: ${focusInExpandFwd} 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     margin-bottom: 10rem;  // ヘッダーの下部にマージンを追加
   }

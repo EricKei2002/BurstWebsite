@@ -59,13 +59,19 @@ background-clip: text;
 cursor: pointer;
 padding: 5px 20px;
 font-size: 4rem;
+padding: 5px 20px;
 
 @media (min-width: 768px) {
   padding: 10px 30px;
   font-size: 3rem;
 }
-`;
 
+// モバイル版のスタイリングを調整
+@media (max-width: 768px) {
+  font-size: 2rem;
+  padding: 5px 10px;
+}
+`;
 // キーフレームアニメーションの定義
 const focusInExpandFwd = keyframes`
   0% {
@@ -104,37 +110,43 @@ const Header = styled.header`
 
 const CenteredText = styled.p`
   text-align: center;
-  font-size: 4.5vw;  // テキストサイズを大きく
-  margin: 2rem 0;  // 上下の間隔を追加
+  font-size: 3vw;  // テキストサイズを大きく
+  margin: 8vw 0;  // 上下の間隔を追加
+
+  // モバイル版のテキストサイズを大きくする
+  @media (max-width: 768px) {
+    font-size: 5vw;
+  }
 `;
 
 
-const MemberContainer = styled.div.attrs(props => ({
-  reverseLayout: props.reverseLayout
-}))`
-  display: flex;
-  flex-direction: ${props => props.reverseLayout ? "column" : "row"};
-  align-items: ${props => props.reverseLayout ? "center" : "flex-start"};
-  justify-content: ${props => props.reverseLayout ? "center" : "flex-end"};
-  margin-top: 5%;
-  margin-bottom: 5%;
-`;
-
-
-const MemberImage = styled.img.attrs(props => ({
-  smallScreen: props.smallScreen
-}))`
-  width: ${props => props.smallScreen ? "100%" : "600px"};
-  height: ${props => props.smallScreen ? "auto" : "500px"};
-  border-radius: 30%;
-  margin-right: ${props => props.smallScreen ? "0" : "10%"};
-  margin-left: ${props => props.smallScreen ? "0" : "-35%"};
-  margin-bottom: 10px;
-`;
+  const MemberContainer = styled.div.attrs(props => ({
+    reverseLayout: props.reverseLayout
+  }))`
+    display: flex;
+    flex-direction: ${props => props.reverseLayout ? "column" : "row"};
+    align-items: center;  // 常に中央揃えに
+    justify-content: center;  // 子要素を中央に配置
+    margin-top: 5%;
+    margin-bottom: 5%;
+  `;
+  
+  const MemberImage = styled.img.attrs(props => ({
+    smallScreen: props.smallScreen
+  }))`
+    width: ${props => props.smallScreen ? "100%" : "600px"};
+    height: ${props => props.smallScreen ? "auto" : "500px"};
+    border-radius: 30%;
+    margin-bottom: 10px;
+  `;
+  
 const MemberName = styled.div`
-  font-size: 1.8rem;  // スマホのフォントサイズを少し小さくする
+  max-width: 250px;  // 最大幅を設定
+  margin: 0 auto;  // センタリングのためのマージン
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 15%;  // スマホのマージンを少し減少させる
+  margin-bottom: 15%;
+  text-align: center;  // テキストを中央揃えに
 
   @media (min-width: 768px) {
     font-size: 3.5rem;
@@ -143,15 +155,24 @@ const MemberName = styled.div`
 `;
 
 const MemberDescription = styled.div`
-  text-align: left;
-  font-size: 1.5rem;  // スマホのフォントサイズを少し小さくする
-  word-wrap: break-word;  // テキストがコンテナの幅を超える場合に折り返す
+  text-align: center;
+  font-size: 1.5rem;
+  word-wrap: break-word;
+
+  ul {
+    list-style-type: none;  // リストのマーカーを削除
+    padding: 0;  // パディングをリセット
+    margin: 0;  // マージンをリセット
+
+    li {
+      margin-bottom: 10px;  // 各アイテム間のスペースを設定
+    }
+  }
 
   @media (min-width: 768px) {
     font-size: 3rem;
   }
 `;
-
 
 
 const theme = createTheme({
@@ -176,10 +197,10 @@ const theme = createTheme({
             <h1>About Us</h1>
           </Header>
           <CenteredText>
-            burstはロゴデザインとweb・アプリ製作とGoods制作を行ってます。
+            Burstはロゴデザインとweb・アプリ製作とGoods制作を行ってます。
           </CenteredText>
           <CenteredText>
-            デザインの加藤有、技術の山本エリック恵の2人で2023年の結成されました。
+            加藤有、EricKeiFausettの2人で2023年の結成されました。
           </CenteredText>
           <CenteredText>
             笑顔をイメージしたデザインやクスッと笑えるようなアイデア性で
@@ -188,39 +209,51 @@ const theme = createTheme({
             見た人や関わる人の笑顔を作ることを理念に活動しています。
           </CenteredText>
           <div>
-    <p>
-        <StyledLink className="bgleft" href="http://localhost:3000/Logo">
-            <span>Logodesigns</span>
-        </StyledLink>
-    </p>
-    <p>
-        <StyledLink className="bgleft" href="https://github.com/EricKei2002">
-            <span>Programming</span>
-        </StyledLink>
-    </p>
-    <p>
-        <StyledLink className="bgleft" href="http://localhost:3000/Goods">
-            <span>Goods制作</span>
-        </StyledLink>
-    </p>
-</div>
-        <MemberContainer reverseLayout={isSmallScreen}>
-                    <MemberImage src={member1Image} alt="加藤有" smallScreen={isSmallScreen} />
-                    <div>
-                        <MemberName>加藤有</MemberName>
-                        <MemberDescription>Logo designer/Vlog作成/Goods制作</MemberDescription>
-                    </div>
-                </MemberContainer>
-                <MemberContainer reverseLayout={isSmallScreen}>
-                    <MemberImage src={member2Image} alt="Eric Kei Fausett" smallScreen={isSmallScreen} />
-                    <div>
-                        <MemberName>Eric Kei Fausett</MemberName>
-                        <MemberDescription>Programmer/Streaming/Model</MemberDescription>
-                    </div>
-                </MemberContainer>
-                </div>
-    </ThemeProvider>
-  );
-};
-
-export default AboutUs;
+            <p>
+              <StyledLink className="bgleft" href="http://localhost:3000/Logo">
+                <span>Logodesigns</span>
+              </StyledLink>
+            </p>
+            <p>
+              <StyledLink className="bgleft" href="http://localhost:3000/Programming">
+                <span>Programming</span>
+              </StyledLink>
+            </p>
+            <p>
+              <StyledLink className="bgleft" href="http://localhost:3000/Goods">
+                <span>Goods制作</span>
+              </StyledLink>
+            </p>
+          </div>
+          <MemberContainer reverseLayout={isSmallScreen}>
+            <MemberImage src={member1Image} alt="加藤有" smallScreen={isSmallScreen} />
+            <div>
+              <MemberName>加藤有</MemberName>
+              <MemberDescription>
+                <ul>
+                  <li>Logo designer</li>
+                  <li>Vlog作成</li>
+                  <li>Goods制作</li>
+                </ul>
+              </MemberDescription>
+            </div>
+          </MemberContainer>
+          <MemberContainer reverseLayout={isSmallScreen}>
+            <MemberImage src={member2Image} alt="Eric Kei Fausett" smallScreen={isSmallScreen} />
+            <div>
+              <MemberName>Eric Kei Fausett</MemberName>
+              <MemberDescription>
+                <ul>
+                  <li>Programmer</li>
+                  <li>Streaming</li>
+                  <li>Model</li>
+                </ul>
+              </MemberDescription>
+            </div>
+          </MemberContainer>
+        </div>
+      </ThemeProvider>
+    );
+  };
+  export default AboutUs;
+  

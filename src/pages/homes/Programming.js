@@ -56,7 +56,7 @@ export default function Programming() {
         <div className="wrap-text resize-text" style={{ textAlign: "center" }}>
           このページは作成途中 お待ちください
         </div>
-        <div className="wrap-text resize-text" style={{ paddingTop: "5%", fontSize: "3em", textAlign: "center", fontWeight: "bold" }}>
+        <div className="wrap-text resize-text" style={{ paddingTop: "5%", fontSize: "5vw", textAlign: "center", fontWeight: "bold" }}>
           by Eric Kei
         </div>
         <div style={{ paddingBottom: "20%" }}> </div>

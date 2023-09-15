@@ -50,7 +50,7 @@ const Top = () => {
 
   const achievementsTextStyle = {
     textAlign: "center",
-    fontSize: "4em",
+    fontSize: "2em",
     fontWeight: "bold",
     color: "#FFF",
     textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
@@ -80,10 +80,12 @@ const Top = () => {
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    width: "50%",
+    width: "70%",  // 幅を70%に設定
+    height: "70vw",  // 例として高さを500pxに固定。必要に応じて調整してください。
+    objectFit: "cover",  // 画像がボックスにフィットするように設定
     boxShadow: "0px 4px 8px rgba(0,0,0,0.5)",
     marginBottom: "5%"
-  };
+};
 
   return (
     <Box>
