@@ -63,10 +63,7 @@ function Image({ id, divStyle, imgStyle, windowWidth }) { // windowWidth を追�
     <section style={sectionStyle}>
       <a href={imageUrl}>
         <div ref={ref} style={divStyle}>
-          {/* 3. <img> タグを修正して、インポートした画像を使用するように変更 */}
-          {imageMap.map(imgSrc =>(
-            <img src={imgSrc} style={imgStyle} />
-          ))}
+          <img src={imageMap[id - 1]} style={imgStyle} alt={`Image ${id}`} />
         </div>
       </a>
       <motion.h2 style={{ ...h2DynamicStyle, y }}>{`#00${id}`}</motion.h2>
