@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/BurstWebsite/static/css/main.e6c13ad2.css",
-    "main.js": "/BurstWebsite/static/js/main.2e8d1bc1.js",
+    "main.js": "/BurstWebsite/static/js/main.c4175dd3.js",
     "static/js/651.70919117.chunk.js": "/BurstWebsite/static/js/651.70919117.chunk.js",
     "static/media/HP MOVIE2.mp4": "/BurstWebsite/static/media/HP MOVIE2.e5487bcc2e362d7a94fd.mp4",
     "static/media/HP写真.png": "/BurstWebsite/static/media/HP写真.14b4d781e9cab4a73d58.png",
@@ -24,11 +24,11 @@
     "static/media/1.jpg": "/BurstWebsite/static/media/1.939a1dcb976e90026e3e.jpg",
     "index.html": "/BurstWebsite/index.html",
     "main.e6c13ad2.css.map": "/BurstWebsite/static/css/main.e6c13ad2.css.map",
-    "main.2e8d1bc1.js.map": "/BurstWebsite/static/js/main.2e8d1bc1.js.map",
+    "main.c4175dd3.js.map": "/BurstWebsite/static/js/main.c4175dd3.js.map",
     "651.70919117.chunk.js.map": "/BurstWebsite/static/js/651.70919117.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2e8d1bc1.js"
+    "static/js/main.c4175dd3.js"
   ]
 }
