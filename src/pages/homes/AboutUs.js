@@ -210,17 +210,17 @@ const theme = createTheme({
           </CenteredText>
           <div>
             <p>
-              <StyledLink className="bgleft" href="http://localhost:3000/Logo">
+              <StyledLink className="bgleft" href="/Logo">
                 <span>Logodesigns</span>
               </StyledLink>
             </p>
             <p>
-              <StyledLink className="bgleft" href="http://localhost:3000/Programming">
+              <StyledLink className="bgleft" href="/Programming">
                 <span>Programming</span>
               </StyledLink>
             </p>
             <p>
-              <StyledLink className="bgleft" href="http://localhost:3000/Goods">
+              <StyledLink className="bgleft" href="/Goods">
                 <span>Goods制作</span>
               </StyledLink>
             </p>
