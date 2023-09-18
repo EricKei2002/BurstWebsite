@@ -16,7 +16,7 @@ import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 
 const setNavLinks = [
-  { text: "Top", url: "/BurstWebsite" },
+  { text: "Top", url: "/Top" },
   { text: "Logo", url: "/Logo" },
   { text: "Programming", url: "/Programming" },
   { text: "Goods", url: "/Goods" },
@@ -41,7 +41,7 @@ const Header = () => {
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box>
               <Typography component="h1">
-                <Link to="/BurstWebsite">
+                <Link to="/Top">
                   <img src={Logo} alt="burst" height="60" width="auto" />
                 </Link>
               </Typography>

@@ -14,10 +14,10 @@ import Footer from "./components/Footer";
 
 const App = () => {
   const location = useLocation();
-  const [loading, setLoading] = useState(location.pathname === '/BurstWebsite');
+  const [loading, setLoading] = useState(location.pathname === '/Top');
 
   useEffect(() => {
-    if (location.pathname !== '/BurstWebsite') {
+    if (location.pathname !== '/Top') {
       return;
     }
 
@@ -36,7 +36,7 @@ const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/BurstWebsite" element={<Top />} />
+        <Route path="/Top" element={<Top />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/Goods" element={<Goods />} />
         <Route path="/Logo" element={<Logo />} />
