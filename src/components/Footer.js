@@ -4,6 +4,10 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from '@material-ui/core/styles';
+import YouTubeIcon from '../assets/images/youtube.png';
+import TwitterIcon from '../assets/images/twitter2.png';
+import TwitterHoveredIcon from '../assets/images/twitter-hovered.png';
+import InstagramIcon from '../assets/images/instagram2.png';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,27 +62,28 @@ function SocialLinks() {
     <ul className={classes.social}>
       <li>
         <a href="https://www.youtube.com/@user-yn3jr7yx1k">
-          <img src="/youtube.png" alt="YouTube Icon" />
+          {/* 2. インポートした画像を使用 */}
+          <img src={YouTubeIcon} alt="YouTube Icon" />
         </a>
         <span className={classes.footerText}>YouTube</span>
       </li>
       <li
-        onMouseEnter={() => setTwitterHovered(true)} // マウスが要素の上にあるとき
-        onMouseLeave={() => setTwitterHovered(false)} // マウスが要素の外に移動したとき
+        onMouseEnter={() => setTwitterHovered(true)}
+        onMouseLeave={() => setTwitterHovered(false)}
       >
-        <a href="#">
+        <a href="https://twitter.com/chicken0216">
           <img
-            src={twitterHovered ? "/twitter-hovered.png" : "/twitter2.png"} // ホバー時の画像とデフォルトの画像を動的に切り替え
+            src={twitterHovered ? TwitterHoveredIcon : TwitterIcon}
             alt="Twitter Icon"
           />
         </a>
-        <span className={classes.footerText} style={{color: twitterHovered ? 'black' : 'black'}}>  {/* ホバー時の文字色を動的に切り替え */}
+        <span className={classes.footerText} style={{color: twitterHovered ? 'black' : 'black'}}>
         {twitterHovered ? "   X   " : "Twitter"}
         </span>
       </li>
       <li>
         <a href="https://www.instagram.com/burst_0000_8888/">
-          <img src="/instagram2.png" alt="Instagram Icon" />
+          <img src={InstagramIcon} alt="Instagram Icon" />
         </a>
         <span className={classes.footerText}>Instagram</span>
       </li>

@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect } from "react"; // useEffect をインポート
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-
+import image1 from '../../assets/images/1.jpg';
+import image2 from '../../assets/images/2.jpg';
+import image3 from '../../assets/images/3.jpg';
+import image4 from '../../assets/images/4.jpg';
 
 const sectionStyle = {
   height: "100vh",
@@ -12,6 +15,15 @@ const sectionStyle = {
   perspective: "500wh",
   marginBottom: "2rem"  // この行を追加
 };
+
+const imageMap = [
+  image1,
+  image2,
+  image3,
+  image4
+];
+
+
 
 const progressStyle = {
   position: "fixed",
@@ -51,7 +63,10 @@ function Image({ id, divStyle, imgStyle, windowWidth }) { // windowWidth を追�
     <section style={sectionStyle}>
       <a href={imageUrl}>
         <div ref={ref} style={divStyle}>
-          <img src={`/${id}.jpg`} alt={`Image ${id}`} style={imgStyle} />
+          {/* 3. <img> タグを修正して、インポートした画像を使用するように変更 */}
+          {imageMap.map(imgSrc =>(
+            <img src={imgSrc} style={imgStyle} />
+          ))}
         </div>
       </a>
       <motion.h2 style={{ ...h2DynamicStyle, y }}>{`#00${id}`}</motion.h2>

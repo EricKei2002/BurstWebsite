@@ -1,12 +1,13 @@
 import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import logoImage1 from "/home/burst/BurstWebSite/src/assets/images/DSC08762.JPG";
-import additionalImage from "/home/burst/BurstWebSite/src/assets/images/logo2.jpg";
-import logoImage2 from "/home/burst/BurstWebSite/src/assets/images/2案提案.jpg";
-import logoImage3 from "/home/burst/BurstWebSite/src/assets/images/DSC08540.JPG";
-import logoImage4 from "/home/burst/BurstWebSite/src/assets/images/DSC08460.jpg";
-import newImage from "/home/burst/BurstWebSite/src/assets/images/スクリーンショット (171).png";  // 画像の正確なパスに置き換えてください。
-import secondNewImage from "/home/burst/BurstWebSite/src/assets/images/HP.jpg";  // 画像の正確なパスに置き換えてください。
+import logoImage1 from '../../assets/images/DSC08762.JPG';
+import additionalImage from '../../assets/images/logo2.jpg';
+import logoImage2 from '../../assets/images/案提案2.jpg';
+import logoImage3 from '../../assets/images/DSC08540.JPG';
+import logoImage4 from '../../assets/images/DSC08460.jpg';
+import newImage from '../../assets/images/スクリーンショット (171).png';
+import secondNewImage from '../../assets/images/HP.jpg';
+
 
 export default function App() {
   const { scrollYProgress } = useScroll();
