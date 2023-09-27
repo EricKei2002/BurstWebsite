@@ -18,5 +18,6 @@ jobs:
         run: |
           echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
           chmod 600 deploy_key
-          rsync -avz -e "ssh -i deploy_key -o StrictHostKeyChecking=no" ./ sv14737.xserver.jp@burst.style:/path/to/your/site/on/xserver/
+         rsync -avz -e "ssh -p 10022 -i deploy_key -o StrictHostKeyChecking=no" website/ sv14737.xserver.jp@burst.style:/burst.style/public_html
+
           rm -f deploy_key
