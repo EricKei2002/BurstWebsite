@@ -18,6 +18,6 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /burst.style/public_html/
+           cd /home/burststyle/burst.style/public_html/
             git checkout develop
             git pull origin develop
