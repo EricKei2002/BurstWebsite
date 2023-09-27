@@ -1,23 +1,23 @@
-name: Deploy to Xserver
-
+name: Release to Develop Environment
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
-
+    branches:
+      - develop
+      
 jobs:
-  deploy:
+  job1:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # 他のビルドステップがあればここに追加
-
-      - name: Deploy to Xserver
-        run: |
-          echo "${{ secrets.DEPLOY_KEY }}" > deploy_key
-          chmod 600 deploy_key
-         rsync -avz -e "ssh -p 10022 -i deploy_key -o StrictHostKeyChecking=no" website/ sv14737.xserver.jp@burst.style:/burst.style/public_html
-
-          rm -f deploy_key
+      - name: ssh and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home/server_id/mydomein.jp/sample/
+            git checkout develop
+            git pull origin develop
