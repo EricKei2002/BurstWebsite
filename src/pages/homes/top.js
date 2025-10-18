@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import desktopVideo from '../../assets/images/HP MOVIE2.mp4';
+import desktopVideo from '../../assets/images/HP_MOVIE2.mp4';
 import portfolioImage from '../../assets/images/S__71622688_0.jpg';
 import portfolioImage2 from '../../assets/images/S__71622690_0.jpg';
 import portfolioImage3 from '../../assets/images/S__71622691_0.jpg';
@@ -82,7 +82,7 @@ const Top = () => {
     marginLeft: "auto",
     marginRight: "auto",
     width: "70%",  // 幅を70%に設定
-    height: "70vw",  // 例として高さを500pxに固定。必要に応じて調整してください。
+    height: "auto",  // 例として高さを500pxに固定。必要に応じて調整してください。
     objectFit: "cover",  // 画像がボックスにフィットするように設定
     boxShadow: "0px 4px 8px rgba(0,0,0,0.5)",
     marginBottom: "5%"
