@@ -61,7 +61,7 @@ function SocialLinks() {
   return (
     <ul className={classes.social}>
       <li>
-        <a href="https://www.youtube.com/@user-yn3jr7yx1k">
+        <a href="https://www.youtube.com/@burst0000">
           {/* 2. インポートした画像を使用 */}
           <img src={YouTubeIcon} alt="YouTube Icon" />
         </a>
