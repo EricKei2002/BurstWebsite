@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import logoImage1 from '../../assets/images/DSC08762.JPG';
 import additionalImage from '../../assets/images/logo2.jpg';
 import logoImage2 from '../../assets/images/案提案2.jpg';
@@ -10,13 +10,6 @@ import secondNewImage from '../../assets/images/HP.jpg';
 
 
 export default function App() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   return (
     <>
 <style>

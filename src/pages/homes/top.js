@@ -38,7 +38,7 @@ const Top = () => {
       return () => {
         clearTimeout(timer);
       };
-    }, [currentImageIndex]);
+    }, [currentImageIndex, portfolioImages.length]);
 
   const videoContainerStyle = {
     position: "relative",
