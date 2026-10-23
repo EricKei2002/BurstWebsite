@@ -63,7 +63,7 @@ function Image({ id, divStyle, imgStyle, windowWidth }) { // windowWidth を追�
     <section style={sectionStyle}>
       <a href={imageUrl}>
         <div ref={ref} style={divStyle}>
-          <img src={imageMap[id - 1]} style={imgStyle} alt={`Image ${id}`} />
+          <img src={imageMap[id - 1]} style={imgStyle} alt={`#00${id}`} />
         </div>
       </a>
       <motion.h2 style={{ ...h2DynamicStyle, y }}>{`#00${id}`}</motion.h2>
